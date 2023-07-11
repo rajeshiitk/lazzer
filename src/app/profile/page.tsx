@@ -2,7 +2,6 @@
 import React from 'react';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
-import { on } from 'events';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
@@ -25,7 +24,7 @@ const menuItems = [
   
 
 
-function page() {
+function Page() {
   const router = useRouter();
   const [user, setUser] = React.useState({
     id: '',
@@ -58,7 +57,7 @@ function page() {
   )
 }
 
-export default page;
+export default Page;
 
 
 

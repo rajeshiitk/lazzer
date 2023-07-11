@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { set } from "mongoose";
 
-function signup() {
+function Signup() {
   const router = useRouter();
   const [user, setUser] = React.useState({
     username: "",
@@ -205,4 +205,4 @@ function signup() {
   );
 }
 
-export default signup;
+export default Signup;

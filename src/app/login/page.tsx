@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
-function login() {
+function Login() {
   const router = useRouter();
   const [user, setUser] = React.useState({
     email: '',
@@ -166,4 +166,4 @@ function login() {
 
 
 
-export default login;
+export default Login;
