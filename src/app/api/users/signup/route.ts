@@ -1,5 +1,5 @@
 import { connectMongoDB } from "@/dbConfig/dbConfig";
-import User from "@/models/User";
+import User from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import { sendEmail } from "@/helpers/mailer";

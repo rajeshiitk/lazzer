@@ -1,4 +1,4 @@
-import User from "@/models/User";
+import User from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
 import { connectMongoDB } from "@/dbConfig/dbConfig";
 

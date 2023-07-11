@@ -1,5 +1,5 @@
 import { connectMongoDB } from "@/dbConfig/dbConfig";
-import User from "@/models/User";
+import User from "@/models/user";
 import { getDataFromToken } from "@/helpers/getDataFromToken";
 import { NextRequest, NextResponse } from "next/server";
 
