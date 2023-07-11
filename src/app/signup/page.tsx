@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { set } from "mongoose";
 
 function Signup() {
   const router = useRouter();
