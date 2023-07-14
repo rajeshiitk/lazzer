@@ -1,10 +1,10 @@
 "use client";
 import React from 'react';
-import { Menu, X } from 'lucide-react';
-import Link from 'next/link';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import Navbar from './Navbar.';
+import TaskList from './tasklist/TaskList';
+import AddTask from './tasklist/AddTask';
 
 
 
@@ -33,10 +33,12 @@ function Page() {
   return (
     <div>
         <Navbar />
+        <AddTask />
+        <TaskList />
       <div className='flex flex-col gap-10 items-center justify-center '>
      <h1 className='text-center'> profile page</h1>
      <button className='bg-gray-900 w-1/3 text-white rounded-md px-4 py-2 ' onClick={getUserDetails}>Get User Details</button>
-     </div>
+     PT</div>
     </div>
   )
 }

@@ -11,6 +11,7 @@ function Signup() {
     username: "",
     email: "",
     password: "",
+    tasks: ["64ae3448ccad12ac07fe4868"],
     // cpassword: ""
   });
 

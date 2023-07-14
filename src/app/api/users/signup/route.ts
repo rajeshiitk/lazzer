@@ -1,5 +1,6 @@
 import { connectMongoDB } from "@/dbConfig/dbConfig";
 import User from "@/models/user";
+import Task from "@/models/task";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import { sendEmail } from "@/helpers/mailer";
@@ -9,7 +10,8 @@ connectMongoDB();
 export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
-    const { username, email, password } = reqBody;
+    console.log(reqBody);
+    const { username, email, password  } = reqBody;
     // Check if all fields are provided
     if (!username || !email || !password) {
       // If any field is missing
