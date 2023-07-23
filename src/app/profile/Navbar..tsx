@@ -30,8 +30,9 @@ export  default function Navbar() {
     const onLogout = async () => {
       try {
           await axios.get("api/users/logout");
+          router.replace("/login");
+          // router.push("/login");
           console.log("logout success");
-          router.push("/login");
       } catch (error: any) {
           console.log("logout failed", error.message)
       }
