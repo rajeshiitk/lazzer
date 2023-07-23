@@ -1,9 +1,9 @@
-import { task, usetasks } from "@/contextStore/task";
+import { task, useTasks } from "@/contextStore/task";
 import { Edit } from "lucide-react";
 import React from "react";
 
 function TaskList() {
-  const {tasks,getTasks} = usetasks();
+  const {tasks,getTasks} = useTasks();
 React.useEffect(() => {
     getTasks();
 }, []);
@@ -77,7 +77,7 @@ React.useEffect(() => {
 }
 
 export const TaskItem = ({item}:any) => {
-  const {handleDeletetask, toggleTaskAsCompleted,taskData,setTaskData} = usetasks();
+  const {handleDeletetask, toggleTaskAsCompleted,taskData,setTaskData} = useTasks();
   
   const onEdit = (item:task) => {
     setTaskData(()=>{return {...item, isEdit: true}});

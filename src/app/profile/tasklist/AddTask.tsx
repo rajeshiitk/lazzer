@@ -1,9 +1,9 @@
-import { usetasks } from '@/contextStore/task';
+import { useTasks } from '@/contextStore/task';
 
 import React from 'react'
 
 function AddTask() {
-  const {taskData, setTaskData, handleAddtask,  handleDeletetask, handleUpdateTask} = usetasks();
+  const {taskData, setTaskData, handleAddtask,  handleDeletetask, handleUpdateTask} = useTasks();
 
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
 
