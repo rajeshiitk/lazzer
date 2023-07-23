@@ -1,10 +1,9 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { Menu, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
-import { useTasks } from "@/contextStore/task";
 
 
 
@@ -36,7 +35,8 @@ export  default function Navbar() {
           // router.replace("/login");
          setTimeout(() => {
           router.replace("/login");
-          }, 500);
+          
+          }, 1000);
           console.log("logout success");
       } catch (error: any) {
           console.log("logout failed", error.message)
