@@ -34,7 +34,6 @@ export  default function Navbar() {
           router.push("/login");
       } catch (error: any) {
           console.log("logout failed", error.message)
-          
       }
     }
   

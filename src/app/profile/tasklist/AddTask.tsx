@@ -34,8 +34,8 @@ function AddTask() {
   return (
     <>
     <div className=" py-6 flex flex-col justify-center sm:py-12">
-      <div className="relative py-3 w-11/12 max-w-xl sm:mx-auto">
-        <div className="relative p-8 bg-white shadow-sm sm:rounded-xl">
+      <div className="relative py-3 w-11/12 max-w-xl mx-auto  sm:mx-auto">
+        <div className="relative  px-2 md:px-8 bg-white shadow-sm sm:rounded-xl">
           <form className="w-full">
             <div className="mb-5 relative">
               <input
