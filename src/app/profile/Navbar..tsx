@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Menu, X } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -30,20 +31,22 @@ export  default function Navbar() {
     const onLogout = async () => {
       try {
           await axios.get("api/users/logout");
-          router.replace("/login");
-          // router.push("/login");
+          // router.replace("/login");
+          router.push("/login");
           console.log("logout success");
       } catch (error: any) {
           console.log("logout failed", error.message)
       }
     }
   
+
   
     const toggleMenu = () => {
       setIsMenuOpen(!isMenuOpen)
     }
   
     return (
+      <>
       <div className="relative w-full bg-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
           <div className="inline-flex items-center space-x-2">
@@ -150,6 +153,7 @@ export  default function Navbar() {
           )}
         </div>
       </div>
+      </>
     )
   }
   
