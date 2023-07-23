@@ -22,7 +22,8 @@ export type tasksContext = {
   getTasks: () => void;
   handleUpdateTask: (task: task) => void;
   taskData: task;
-  setTaskData: React.Dispatch<React.SetStateAction<task>>;
+  // setTaskData: React.Dispatch<React.SetStateAction<task>>;
+  setTaskData:any;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
