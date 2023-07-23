@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import React from 'react'
 
 function Page({params}: {params: {id: string}}) {
@@ -7,11 +6,6 @@ function Page({params}: {params: {id: string}}) {
   {/* component */}
   <div className="h-screen w-full bg-gray-50 flex justify-center items-center">
     <div className="h-56 w-72 absolute flex justify-center items-center">
-      <Image
-        className="object-cover h-20 w-20 rounded-full"
-        src="https://images.unsplash.com/photo-1484608856193-968d2be4080e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80"
-        alt=""
-      />
     </div>
     <div
       className="

@@ -37,8 +37,10 @@ export async function POST(request: NextRequest) {
       email,
       password: hash, // Hashed password
     });
+    console.log("newUser",newUser);
     // Save user and return response
     const savedUser = await newUser.save(); // Save user to database
+    // console.log("savedUser");
     console.log(savedUser);
     await sendEmail({
       email: savedUser.email,

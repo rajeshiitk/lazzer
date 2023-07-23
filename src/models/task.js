@@ -3,9 +3,10 @@ import mongoose from "mongoose";
 const taskSchema = mongoose.Schema({
     title: { type: String, required: [true,"Please provide a title"] },
     description: { type: String, required: [true,"Please provide a description"] },
-    status: { type: String, default: "pending" },
+    completed: { type: Boolean, default: false },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
+    isEdit: { type: Boolean, default: false },
 })
 
 const Task = mongoose.models.Task || mongoose.model("Task", taskSchema);

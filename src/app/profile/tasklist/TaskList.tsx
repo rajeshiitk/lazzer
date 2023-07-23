@@ -1,36 +1,16 @@
-import axios from "axios";
-import { Delete, DeleteIcon, Edit } from "lucide-react";
-import { set } from "mongoose";
+import { task, usetasks } from "@/contextStore/task";
+import { Edit } from "lucide-react";
 import React from "react";
 
 function TaskList() {
-  const [tasks, setTasks] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
-
-
-
-  const getTasks = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get("/api/task");
-      setTasks(response.data.tasks);
-      setLoading(false);
-    } catch (error: any) {
-      console.log("get tasks failed", error.message);
-      setLoading(false);
-    } finally {
-      setLoading(false);
-    }
-  };
-   
-  React.useEffect(() => {
+  const {tasks,getTasks} = usetasks();
+React.useEffect(() => {
     getTasks();
-  }, []);
+}, []);
 
 
   return (
     <>
-      {/* component */}
       <div className="max-w-lg mx-auto my-10 bg-white p-8 rounded-xl shadow shadow-slate-300">
         <div className="flex flex-row justify-between items-center">
           <div>
@@ -97,6 +77,11 @@ function TaskList() {
 }
 
 export const TaskItem = ({item}:any) => {
+  const {handleDeletetask, toggleTaskAsCompleted,taskData,setTaskData} = usetasks();
+  
+  const onEdit = (item:task) => {
+    setTaskData(()=>{return {...item, isEdit: true}});
+  }
   return(
     <div
     id="task"
@@ -105,17 +90,17 @@ export const TaskItem = ({item}:any) => {
     <div className="inline-flex items-center space-x-2">
       <div>
       <input type="checkbox"
-      // onChange={() =>{setTasks({...tasks, status: "completed"}); console.log(tasks)}}
-      checked={item.status === "pending" ? false : true} 
+      onChange={() => toggleTaskAsCompleted(item)}
+      checked={item.completed}
        className="form-checkbox h-5 w-5 text-slate-600" />
       </div>
       <div>{item.title}</div>
     </div>
     <div className="flex gap-2 ">
     <Edit
-    onClick={() => console.log("edit")}
+    onClick={() => onEdit(item)}
      className="w-4 h-4 text-slate-500 hover:text-slate-700 hover:cursor-pointer" />
-    <div onClick={()=> console.log("delete")}>
+    <div onClick={()=> handleDeletetask(item._id)}>
     <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

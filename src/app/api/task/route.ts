@@ -15,11 +15,13 @@ export async function POST(request: NextRequest) {
       // if userId is missing
       return NextResponse.json({ error: "Missing user Id" }, { status: 400 }); // 400 Bad Request
     }
-
+  
     const reqBody = await request.json();
-    const { title, description, status } = reqBody;
+    const { title, description, completed } = reqBody;
+    console.log(reqBody);
     // Check if all fields are provided
-    if (!title || !description || !status) {
+    if (!title || !description ) {
+    
       // If any field is missing
       return NextResponse.json(
         { error: "Please enter all fields" },
@@ -38,9 +40,10 @@ export async function POST(request: NextRequest) {
     const newTask = new Task({
       title,
       description,
-      status,
+      completed,
     });
     // save task
+    console.log(newTask);
     const saved = await newTask.save();
     console.log(newTask);
     // save taskid to user
@@ -97,3 +100,47 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+
+
+export async function DELETE(request:NextRequest, params:{taskId:string} ){
+    try {
+      // get userId from token:
+      const userId = getDataFromToken(request);
+      if (!userId) {
+        return NextResponse.json({ error: "Missing user Id" }, { status: 400 }); // 400 Bad Request
+      }
+    
+        // get taskId from params
+        console.log(params);
+        const {taskId }= params;
+      if (!taskId) {
+        // if taskId is missing
+        console.log(taskId);
+        return NextResponse.json({ error: "Missing task Id" }, { status: 400 }); // 400 Bad Request
+      }
+      // get task
+      const newTask = await Task.findById(taskId);
+      // Check if task exists\
+      if (!newTask) {
+        // if task does not exist
+        return NextResponse.json({ error: "Task does not exist" }, { status: 400 }); // 400 Bad Request
+      }
+    //   delete task
+      const deletedTask = await Task.findByIdAndDelete(taskId);
+      // delete task from user
+      console.log(deletedTask);
+      return NextResponse.json(
+        { message: "Task successfully deleted", success: true, task: deletedTask },
+        { status: 200 }
+      ); // 200 OK
+    
+    } catch (error:any) {
+      console.log(error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+      
+    }
+   
+  }
+    
+  
+

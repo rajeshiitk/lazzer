@@ -1,25 +1,16 @@
-import axios from 'axios';
+import { usetasks } from '@/contextStore/task';
 
 import React from 'react'
 
 function AddTask() {
-  const [taskData, setTaskData] = React.useState({
-    title: '',
-    description: '',
-    status: 'pending',
-    // date: '',
-    // time: '',
-  });
+  const {taskData, setTaskData, handleAddtask,  handleDeletetask, handleUpdateTask} = usetasks();
 
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     if (
       taskData.title.length > 0 &&
       taskData.description.length > 0
-      // taskData.date.length > 0 &&
-      // taskData.time.length > 0
     ) {
       setButtonDisabled(false);
     }
@@ -31,17 +22,10 @@ function AddTask() {
   const onAddTask = async (e:any) => {
     e.preventDefault();
     console.log('taskData', taskData);
-    try {
-      setLoading(true);
-      const response = await axios.post("/api/task", taskData);
-      console.log("response", response);
-      setLoading(false);
-
-    } catch (error: any) {
-      console.log("task add failed", error.message);
-      setLoading(false);
-    } finally {
-      setLoading(false);
+    if(taskData.isEdit) {
+      handleUpdateTask(taskData);
+    } else {
+    handleAddtask(taskData);
     }
   };
 
@@ -49,11 +33,6 @@ function AddTask() {
 
   return (
     <>
-    <button 
-    // onClick={getTasks}
-    >
-      get tasks
-    </button>
     <div className=" py-6 flex flex-col justify-center sm:py-12">
       <div className="relative py-3 w-11/12 max-w-xl sm:mx-auto">
         <div className="relative p-8 bg-white shadow-sm sm:rounded-xl">
@@ -93,10 +72,12 @@ function AddTask() {
               </label>
             </div>
             <button
+            disabled={buttonDisabled}
               onClick={(e:any) => {onAddTask(e)}}
-              className="w-full bg-gray-600 text-white p-3 rounded-md"
+              className={`
+              ${buttonDisabled ? 'bg-gray-400' : 'bg-gray-600 hover:bg-gray-700'} w-full bg-gray-600 text-white p-3 rounded-md`}
             >
-              Add Task
+            {taskData.isEdit ? "Update Task" : "Add Task"}
             </button>
           </form>
         </div>
