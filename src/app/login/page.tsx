@@ -29,7 +29,7 @@ function Login() {
     try {
       setLoading(true);
      const response =  await axios.post('/api/users/login', user); // {email, password}
-      console.log('response', response); // {token, user}
+      // console.log('response', response); // {token, user}
       router.push('/profile');
       setLoading(false);
     }
