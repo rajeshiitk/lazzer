@@ -21,7 +21,7 @@ function AddTask() {
 
   const onAddTask = async (e:any) => {
     e.preventDefault();
-    console.log('taskData', taskData);
+    // console.log('taskData', taskData);
     if(taskData.isEdit) {
       handleUpdateTask(taskData);
     } else {

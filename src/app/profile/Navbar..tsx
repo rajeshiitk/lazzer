@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
+import { useTasks } from "@/contextStore/task";
 
 
 
@@ -31,13 +32,18 @@ export  default function Navbar() {
     const onLogout = async () => {
       try {
           await axios.get("api/users/logout");
+
           // router.replace("/login");
-          router.push("/login");
+         setTimeout(() => {
+          router.replace("/login");
+          }, 500);
           console.log("logout success");
       } catch (error: any) {
           console.log("logout failed", error.message)
       }
     }
+
+   
   
 
   
@@ -86,9 +92,7 @@ export  default function Navbar() {
               type="button"
               className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
             >
-              <Link href="/login">
               Logout
-              </Link>
             </button>
           </div>
           <div className="lg:hidden">

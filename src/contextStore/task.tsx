@@ -41,6 +41,7 @@ export function TasksProvider({ children }: { children: ReactNode }) {
   });
   const [tasks, setTasks] = useState<task[]>([]); //an array of task objects
   const [loading, setLoading] = useState(false);
+  
 
   async function handleAddtask(task: task) {
     try {
