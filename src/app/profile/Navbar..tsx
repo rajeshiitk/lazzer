@@ -4,7 +4,6 @@ import { Menu, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
-import { set } from "mongoose";
 
 
 
@@ -27,35 +26,21 @@ const menuItems = [
 
 export  default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-    const [isAuthenticated, setIsAuthenticated] = React.useState(true);
     const router = useRouter();
-  
     const onLogout = async () => {
       try {
           await axios.get("api/users/logout");
-
-          // router.replace("/login");
-          if(isAuthenticated){
-            setIsAuthenticated(false);
-          }
           router.replace("/login");
           console.log("logout success");
       } catch (error: any) {
           console.log("logout failed", error.message)
       }
     }
-
-   
-  
-
-    useEffect(() => {
-      
-    }, [isAuthenticated]);
      
   
-    const toggleMenu = () => {
+const toggleMenu = () => {
       setIsMenuOpen(!isMenuOpen)
-    }
+}
   
     return (
       <>

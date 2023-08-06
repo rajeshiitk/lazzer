@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Navbar from './Navbar.';
 import TaskList from './tasklist/TaskList';
 import AddTask from './tasklist/AddTask';
+import Pomodoro from './pomodoro/Pomodoro';
 
 
 
@@ -33,6 +34,7 @@ function Page() {
   return (
     <div>
         <Navbar />
+        <Pomodoro />
         <AddTask />
         <TaskList />
       <div className='flex flex-col gap-10 items-center justify-center '>
