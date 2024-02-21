@@ -11,7 +11,10 @@ export async function POST(request: NextRequest) {
     const reqBody = await request.json();
     const { email, password } = reqBody;
     if (!email || !password) {
-      return { error: "Please enter all fields" };
+      return NextResponse.json(
+        { error: "Please enter all fields" },
+        { status: 400 }
+      );
     }
     // Check if user already exists
     const user = await User.findOne({ email });

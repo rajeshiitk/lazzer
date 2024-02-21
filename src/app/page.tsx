@@ -1,19 +1,24 @@
-import Link from "next/link";
+"use client";
+import Navbar from "@/components/Navbar.";
+import Pomodoro from "@/components/pomodoro/Pomodoro";
+import AddTask from "@/components/tasklist/AddTask";
+import TaskList from "@/components/tasklist/TaskList";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex mt-20 flex-col items-center">
-      <h1>Home Page</h1>
-      <div className="flex gap-6">
-      <button className="bg-gray-500 hover:bg-gray-200 px-4 py-2 rounded-md text-white hover:text-gray-800">
-        <Link href="/profile/rajeshii">Profile</Link>
-      </button>
-      <button className="bg-gray-500 hover:bg-gray-200 px-4 py-2 rounded-md text-white hover:text-gray-800">
-        <Link href="/login">Login</Link>
-      </button>
-      <button className="bg-gray-500 hover:bg-gray-200 px-4 py-2 rounded-md text-white hover:text-gray-800">
-        <Link href="/signup">Sign Up</Link>
-      </button>
+    <main className="h-screen grid-cols-2 items-center">
+      <Navbar />
+
+      <div className="h-full w-full grid  items-center justify-center">
+        <Pomodoro />
+      </div>
+      <div className="fixed hidden overflow-auto h-screen md:block right-0 top-0">
+        <AddTask />
+        <TaskList />
+      </div>
+      <div className=" block md:hidden">
+        <AddTask />
+        <TaskList />
       </div>
     </main>
   );

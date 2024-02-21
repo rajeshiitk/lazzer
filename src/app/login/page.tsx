@@ -29,7 +29,7 @@ function Login() {
       setLoading(true);
       const response = await axios.post("/api/users/login", user); // {email, password}
       // console.log('response', response); // {token, user}
-      router.push("/profile");
+      router.push("/");
       setLoading(false);
     } catch (error: any) {
       console.log("login failed", error.message);
