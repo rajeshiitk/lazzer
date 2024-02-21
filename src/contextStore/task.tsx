@@ -12,18 +12,16 @@ export type task = {
   isEdit?: boolean; //? means optional
 };
 
-//thapa technical
-
 export type tasksContext = {
   tasks: task[];
   handleAddtask: (task: task) => void; //call signature
-  toggleTaskAsCompleted: (task:task) => void;
+  toggleTaskAsCompleted: (task: task) => void;
   handleDeletetask: (id: string) => void;
   getTasks: () => void;
   handleUpdateTask: (task: task) => void;
   taskData: task;
   // setTaskData: React.Dispatch<React.SetStateAction<task>>;
-  setTaskData:any;
+  setTaskData: any;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -41,7 +39,6 @@ export function TasksProvider({ children }: { children: ReactNode }) {
   });
   const [tasks, setTasks] = useState<task[]>([]); //an array of task objects
   const [loading, setLoading] = useState(false);
-  
 
   async function handleAddtask(task: task) {
     try {
@@ -139,7 +136,6 @@ export function TasksProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    // @ts-ignore
     <tasksContext.Provider
       value={{
         tasks,

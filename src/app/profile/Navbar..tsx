@@ -1,49 +1,44 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { Menu, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
 
-
-
 const menuItems = [
-    {
-      name: 'Profile',
-      href: '/profile',
-    },
-    {
-      name: 'Login',
-      href: '/login',
-    },
-    {
-      name: 'Sign Up',
-      href: '/signup',
-    },
-  ]
-  
+  {
+    name: "Profile",
+    href: "/profile",
+  },
+  {
+    name: "Login",
+    href: "/login",
+  },
+  {
+    name: "Sign Up",
+    href: "/signup",
+  },
+];
 
-
-export  default function Navbar() {
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-    const router = useRouter();
-    const onLogout = async () => {
-      try {
-          await axios.get("api/users/logout");
-          router.replace("/login");
-          console.log("logout success");
-      } catch (error: any) {
-          console.log("logout failed", error.message)
-      }
+export default function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const router = useRouter();
+  const onLogout = async () => {
+    try {
+      await axios.get("api/users/logout");
+      router.replace("/login");
+      console.log("logout success");
+    } catch (error: any) {
+      console.log("logout failed", error.message);
     }
-     
-  
-const toggleMenu = () => {
-      setIsMenuOpen(!isMenuOpen)
-}
-  
-    return (
-      <>
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  return (
+    <>
       <div className="relative w-full bg-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
           <div className="inline-flex items-center space-x-2">
@@ -138,7 +133,7 @@ const toggleMenu = () => {
                     </nav>
                   </div>
                   <button
-                  onClick={onLogout}
+                    onClick={onLogout}
                     type="button"
                     className="mt-4 w-full rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                   >
@@ -150,8 +145,6 @@ const toggleMenu = () => {
           )}
         </div>
       </div>
-      </>
-    )
-  }
-  
-  
+    </>
+  );
+}

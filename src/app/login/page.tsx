@@ -1,16 +1,16 @@
 "use client";
-import React from 'react'
-import { ArrowRight } from 'lucide-react'
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import axios from 'axios';
+import React from "react";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 function Login() {
   const router = useRouter();
   const [user, setUser] = React.useState({
-    email: '',
-    password: '',
-  })
+    email: "",
+    password: "",
+  });
 
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
@@ -23,26 +23,22 @@ function Login() {
     }
   }, [user]);
 
-
   const onLogin = async () => {
     console.log(user);
     try {
       setLoading(true);
-     const response =  await axios.post('/api/users/login', user); // {email, password}
+      const response = await axios.post("/api/users/login", user); // {email, password}
       // console.log('response', response); // {token, user}
-      router.push('/profile');
+      router.push("/profile");
+      setLoading(false);
+    } catch (error: any) {
+      console.log("login failed", error.message);
+      setLoading(false);
+    } finally {
       setLoading(false);
     }
-    catch (error: any) {
-      console.log('login failed', error.message);
-      setLoading(false);
-    }
-    finally {
-      setLoading(false);
-    }
+  };
 
-  }
-  
   return (
     <section>
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
@@ -65,7 +61,7 @@ function Login() {
             Sign in to your account
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600 ">
-            Don&apos;t have an account?{' '}
+            Don&apos;t have an account?{" "}
             <Link
               href="/signup"
               title=""
@@ -77,29 +73,41 @@ function Login() {
           <form action="#" method="POST" className="mt-8">
             <div className="space-y-5">
               <div>
-                <label htmlFor="" className="text-base font-medium text-gray-900">
-                  {' '}
-                  Email address{' '}
+                <label
+                  htmlFor=""
+                  className="text-base font-medium text-gray-900"
+                >
+                  {" "}
+                  Email address{" "}
                 </label>
                 <div className="mt-2">
                   <input
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="email"
                     value={user.email}
-                    onChange={(e) => setUser({ ...user, email: e.target.value })}
+                    onChange={(e) =>
+                      setUser({ ...user, email: e.target.value })
+                    }
                     placeholder="Email"
                   ></input>
                 </div>
               </div>
               <div>
                 <div className="flex items-center justify-between">
-                  <label htmlFor="" className="text-base font-medium text-gray-900">
-                    {' '}
-                    Password{' '}
+                  <label
+                    htmlFor=""
+                    className="text-base font-medium text-gray-900"
+                  >
+                    {" "}
+                    Password{" "}
                   </label>
-                  <a href="#" title="" className="text-sm font-semibold text-black hover:underline">
-                    {' '}
-                    Forgot password?{' '}
+                  <a
+                    href="#"
+                    title=""
+                    className="text-sm font-semibold text-black hover:underline"
+                  >
+                    {" "}
+                    Forgot password?{" "}
                   </a>
                 </div>
                 <div className="mt-2">
@@ -107,7 +115,9 @@ function Login() {
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="password"
                     value={user.password}
-                    onChange={(e) => setUser({ ...user, password: e.target.value })}
+                    onChange={(e) =>
+                      setUser({ ...user, password: e.target.value })
+                    }
                     placeholder="Password"
                   ></input>
                 </div>
@@ -118,12 +128,13 @@ function Login() {
                   onClick={onLogin}
                   className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                 >
-                 {buttonDisabled ? "NO login" : "Login"} <ArrowRight className="ml-2" size={16} />
+                  {buttonDisabled ? "NO login" : "Login"}{" "}
+                  <ArrowRight className="ml-2" size={16} />
                 </button>
               </div>
             </div>
           </form>
-          <div className="mt-3 space-y-3">
+          {/* <div className="mt-3 space-y-3">
             <button
               type="button"
               className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
@@ -156,13 +167,11 @@ function Login() {
               </span>
               Sign in with Facebook
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
-  )
+  );
 }
-
-
 
 export default Login;

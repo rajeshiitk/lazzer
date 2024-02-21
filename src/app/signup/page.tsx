@@ -40,7 +40,6 @@ function Signup() {
       // console.log("response", response);
       setLoading(false);
       router.push("/login");
-     
     } catch (error: any) {
       console.log("sign failed", error.message);
       setLoading(false);
@@ -164,7 +163,7 @@ function Signup() {
                 </div>
               </div>
             </form>
-            <div className="mt-3 space-y-3">
+            {/* <div className="mt-3 space-y-3">
               <button
                 type="button"
                 className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
@@ -197,7 +196,7 @@ function Signup() {
                 </span>
                 Sign up with Facebook
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       )}

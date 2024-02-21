@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, createContext, useEffect } from "react";
 
 export type timerContextType = {
   isActive: number;
@@ -18,21 +18,20 @@ export type timerContextType = {
   setLongBreak: React.Dispatch<React.SetStateAction<number>>;
   currentTimer: number;
   setCurrentTimer: React.Dispatch<React.SetStateAction<number>>;
-
 };
 
-const TimerContext = React.createContext<timerContextType | null>(null);
+const TimerContext = createContext<timerContextType | null>(null);
 
 export function TimerProvider({ children }: { children: React.ReactNode }) {
-  const [isActive, setIsActive] = React.useState(0);
-  const [progress, setProgress] = React.useState(25 * 60);
-  const [time, setTime] = React.useState(100);
-  const [isRunning, setIsRunning] = React.useState(false);
-  const [focus, setFocus] = React.useState(25 * 60);
-  const [shortBreak, setShortBreak] = React.useState(5 * 60);
-  const [longBreak, setLongBreak] = React.useState(15 * 60);
-  const [currentTimer, setCurrentTimer] = React.useState(focus);
-  React.useEffect(() => {
+  const [isActive, setIsActive] = useState<number>(0);
+  const [progress, setProgress] = useState<number>(25 * 60);
+  const [time, setTime] = useState<number>(100);
+  const [isRunning, setIsRunning] = useState<boolean>(false);
+  const [focus, setFocus] = useState<number>(25 * 60);
+  const [shortBreak, setShortBreak] = useState<number>(5 * 60);
+  const [longBreak, setLongBreak] = useState<number>(15 * 60);
+  const [currentTimer, setCurrentTimer] = useState<number>(focus);
+  useEffect(() => {
     switch (isActive) {
       case 0:
         setTime(focus);
