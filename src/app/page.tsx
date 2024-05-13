@@ -12,11 +12,11 @@ export default function Home() {
       <div className="h-full w-full grid  items-center justify-center">
         <Pomodoro />
       </div>
-      <div className="fixed hidden overflow-auto h-screen md:block right-0 top-0">
+      {/* <div className="fixed hidden overflow-auto h-screen md:block right-0 top-0">
         <AddTask />
         <TaskList />
-      </div>
-      <div className=" block md:hidden">
+      </div> */}
+      <div className=" block ">
         <AddTask />
         <TaskList />
       </div>

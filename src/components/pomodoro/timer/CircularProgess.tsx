@@ -17,7 +17,7 @@ function CircularProgess() {
         background: `conic-gradient(#6b7280 ${progress}%, transparent ${progress}%)`,
       }}
     >
-      <div className="w-56 aspect-square rounded-full bg-white grid place-items-center">
+      <div className="w-56 aspect-square rounded-full bg-white dark:bg-slate-950 grid place-items-center">
         <Clock />
       </div>
     </div>

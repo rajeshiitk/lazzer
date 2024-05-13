@@ -12,7 +12,7 @@ function TaskList() {
   return (
     <>
       {!!tasks.length ? (
-        <div className="w-full md:max-w-lg mx-auto h-full sticky    bg-white p-8 rounded-xl shadow shadow-slate-300">
+        <div className="w-full md:max-w-lg mx-auto h-full sticky    p-8 rounded-xl shadow shadow-slate-300">
           {/* <div className="flex flex-row justify-between items-center">
             <div>
               <h1 className="text-3xl font-medium">Tasks list</h1>
@@ -91,7 +91,7 @@ export const TaskItem = ({ item }: any) => {
   return (
     <div
       id="task"
-      className="flex justify-between items-center rounded-lg overflow-hidden border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent bg-gradient-to-r from-transparent to-transparent hover:from-slate-100 transition ease-linear duration-150"
+      className="flex justify-between items-center rounded-lg overflow-hidden border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent bg-gradient-to-r from-transparent to-transparent dark:hover:from-slate-900  hover:from-slate-100 transition ease-linear duration-150"
     >
       <div className="inline-flex items-center space-x-2">
         <div>

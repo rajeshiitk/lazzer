@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 import { TasksProvider } from "@/contextStore/task";
 import { TimerProvider } from "@/contextStore/timer";
+import { ThemeProvider } from "@/contextStore/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,9 +20,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <TimerProvider>
-          <TasksProvider>{children}</TasksProvider>
-        </TimerProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <TimerProvider>
+            <TasksProvider>{children}</TasksProvider>
+          </TimerProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
