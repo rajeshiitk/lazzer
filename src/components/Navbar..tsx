@@ -4,10 +4,13 @@ import React, { useEffect, useState } from "react";
 import Container from "./Container";
 import Link from "next/link";
 import { Moon, Sun } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import ProfileButton from "./ProfileButton";
 import { useTheme } from "next-themes";
 import MenuButton from "./MenuButton";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
+import Logo from "./Logo";
 
 type Props = {};
 
@@ -51,27 +54,23 @@ const Navbar = (props: Props) => {
   return (
     <div
       className={
-        "fixed top-0 left-0 right-0 flex py-1 px-4 border-b z-[1] bg-background/50 backdrop-filter-blur " +
-        (toHide && " py-0 h-0 hidden ")
+        "fixed top-0 left-0 right-0 flex px-1 sm:px-4 border-b z-[1] bg-background/50 backdrop-filter-blur " +
+        (toHide && "  h-0 hidden ")
       }
     >
       <Container>
-        <div className="px-6 lg:px-8 flex h-12 sm:h-14 md:h-16 items-center justify-between w-full">
+        <div className="px-1 sm:px-2 lg:px-4 flex h-12 sm:h-12 md:h-14 items-center justify-between w-full">
           <div className="flex space-x-2">
             <MenuButton />
-            <Link href="/">
-              <h1 className="text-xl font-bold">Lazzer</h1>
-            </Link>
+            <Logo />
           </div>
-          <nav className=" flex items-center  space-x-4  md:space-x-8 lg:space-x-10 text-lg">
+          <nav className=" flex items-center space-x-4   text-lg">
             {routes.map((route) => (
-              <Link
+              <NavbarItem
                 key={route.label}
-                href={route.href}
-                className="hidden sm:block"
-              >
-                {route.label}
-              </Link>
+                link={route.href}
+                label={route.label}
+              />
             ))}
 
             <Button
@@ -81,8 +80,8 @@ const Navbar = (props: Props) => {
               className=" rounded-full"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             >
-              <Sun className="h-6 w-6 hidden dark:block   transition-all  " />
-              <Moon className="h-6 w-6 block dark:hidden transition-all " />
+              <Sun className="h-6 w-6 hidden dark:block text-muted-foreground  transition-all  " />
+              <Moon className="h-6 w-6 block dark:hidden text-muted-foreground transition-all " />
             </Button>
             <ProfileButton />
           </nav>
@@ -91,5 +90,39 @@ const Navbar = (props: Props) => {
     </div>
   );
 };
+
+function NavbarItem({
+  link,
+  label,
+  clickCallback,
+}: {
+  link: string;
+  label: string;
+  clickCallback?: () => void;
+}) {
+  const pathname = usePathname();
+  const isActive = pathname === link;
+
+  return (
+    <div className="relative hidden sm:flex items-center">
+      <Link
+        href={link}
+        className={cn(
+          buttonVariants({ variant: "ghost" }),
+          "w-full justify-start text-lg text-muted-foreground hover:text-foreground",
+          isActive && "text-foreground"
+        )}
+        onClick={() => {
+          if (clickCallback) clickCallback();
+        }}
+      >
+        {label}
+      </Link>
+      {isActive && (
+        <div className="absolute -bottom-[2px] left-1/2 hidden h-[2px] w-[80%] -translate-x-1/2 rounded-xl bg-foreground md:block" />
+      )}
+    </div>
+  );
+}
 
 export default Navbar;
