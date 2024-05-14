@@ -27,20 +27,19 @@ function Login() {
 
   const onLogin = async () => {
     console.log(user);
-    let response;
     try {
       setLoading(true);
-      response = await axios.post("/api/users/login", user); // {email, password}
+      const response = await axios.post("/api/users/login", user); // {email, password}
       console.log("response", response); // {token, user}
+      if (response.status === 200) {
+        router.replace("/");
+      }
       setLoading(false);
     } catch (error: any) {
       console.log("login failed", error.message);
       setLoading(false);
     } finally {
       setLoading(false);
-    }
-    if (response) {
-      router.replace("/");
     }
   };
 
@@ -103,6 +102,7 @@ function Login() {
               </div>
               <div>
                 <Button
+                  type="button"
                   onClick={onLogin}
                   className="inline-flex w-full items-center justify-center rounded-md  px-3.5 py-2.5 font-semibold leading-7 
                   "
