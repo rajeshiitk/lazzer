@@ -6,6 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 import { TasksProvider } from "@/contextStore/task";
 import { TimerProvider } from "@/contextStore/timer";
 import { ThemeProvider } from "@/contextStore/ThemeProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,7 +28,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TimerProvider>
-            <TasksProvider>{children}</TasksProvider>
+            <TasksProvider>
+              {children}
+              <Toaster />
+            </TasksProvider>
           </TimerProvider>
         </ThemeProvider>
       </body>
