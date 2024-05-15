@@ -3,11 +3,6 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-import Pomodoro from "@/components/pomodoro/Pomodoro";
-import Navbar from "@/components/Navbar.";
-import AddTask from "@/components/tasklist/AddTask";
-import TaskList from "@/components/tasklist/TaskList";
-
 function Page() {
   const router = useRouter();
   const [user, setUser] = React.useState({

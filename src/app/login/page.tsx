@@ -39,9 +39,7 @@ function Login() {
         "/api/users/login",
         values
       );
-      if (response.status === 200) {
-        router.replace("/");
-      }
+      router.push("/");
       setLoading(false);
     } catch (error: any) {
       toast.error(error.response.data.error);
