@@ -7,6 +7,7 @@ import { TasksProvider } from "@/contextStore/task";
 import { TimerProvider } from "@/contextStore/timer";
 import { ThemeProvider } from "@/contextStore/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
+import Navbar from "@/components/Navbar.";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -29,6 +30,7 @@ export default function RootLayout({
         >
           <TimerProvider>
             <TasksProvider>
+              <Navbar />
               {children}
               <Toaster />
             </TasksProvider>
