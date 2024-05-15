@@ -82,7 +82,6 @@ export function TaskManagement() {
         </div>
         <DrawerFooter className="pt-1">
           <AddTask />
-          {/* <ProfileForm /> */}
           <DrawerClose asChild>
             <Button variant="outline">Close</Button>
           </DrawerClose>
