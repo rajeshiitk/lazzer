@@ -70,7 +70,7 @@ export default function ForgotPasswordPage() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-base font-medium">
-                      Password
+                      Email
                     </FormLabel>
                     <FormControl>
                       <Input

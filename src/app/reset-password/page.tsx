@@ -97,7 +97,7 @@ function ResetPasswordForm() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel htmlFor="" className="text-base font-medium ">
-                      Password
+                      Confirm Password
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -113,7 +113,7 @@ function ResetPasswordForm() {
               />
               <Button disabled={loading} type="submit" className="w-full">
                 {loading && <LoaderIcon className="animate-spin w-5 mr-4" />}
-                Login
+                Reset Password
                 <ArrowRight className="ml-2" size={16} />
               </Button>
             </form>
