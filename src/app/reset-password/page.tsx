@@ -1,14 +1,12 @@
 "use client";
-import React from "react";
-import { ArrowRight, LoaderIcon } from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import axios, { AxiosError, AxiosResponse } from "axios";
-import { Button } from "@/components/ui/button";
-import Logo from "@/components/Logo";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ILogin, LoginSchema } from "@/schema/Login";
+import { IResetPassword, ResetPasswordSchema } from "@/schema/ResetPassword";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import axios from "axios";
+import { toast } from "sonner";
 import {
   Form,
   FormControl,
@@ -17,30 +15,37 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
+import { ArrowRight, LoaderIcon } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import Logo from "@/components/Logo";
 
-function Login() {
+export default function ResetPasswordPage() {
   const router = useRouter();
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
+  const searchParams = useSearchParams();
 
-  const form = useForm<ILogin>({
-    resolver: zodResolver(LoginSchema),
+  const token = searchParams.get("token");
+
+  const form = useForm<IResetPassword>({
+    resolver: zodResolver(ResetPasswordSchema),
     defaultValues: {
-      email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
-  async function onSubmit(values: ILogin) {
+  async function onSubmit(values: IResetPassword) {
+    if (!token) return toast.error("Token is required");
+
     try {
       setLoading(true);
-      const response: AxiosResponse = await axios.post(
-        "/api/users/login",
-        values
-      );
+      const response = await axios.post("/api/users/reset-password", {
+        token: token,
+        password: values.password,
+      });
       if (response.status === 200) {
-        router.replace("/");
+        toast.success("Password reset successful");
+        router.replace("/login");
       }
       setLoading(false);
     } catch (error: any) {
@@ -52,29 +57,30 @@ function Login() {
   }
 
   return (
-    <section className="min-h-[calc(100svh)] flex justify-center">
-      <div className="flex items-center  justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
-        <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
+    <section className="min-h-[calc(100svh)] w-full flex justify-center">
+      <div className="flex items-center w-full max-w-sm px-4 justify-center  py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+        <div className="xl:mx-auto w-full">
           <div className="mb-2 flex  justify-center">
             <Logo />
           </div>
           <h2 className="text-center text-2xl font-bold mb-4 leading-tight ">
-            Sign in to your account
+            Reset Password 🚀
           </h2>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 disabled={loading}
                 control={form.control}
-                name="email"
+                name="password"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-base font-medium">
-                      Email
+                      Password
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="example@gmail.com"
+                        type="password"
+                        placeholder="Password"
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                         {...field}
                       />
@@ -87,25 +93,16 @@ function Login() {
               <FormField
                 disabled={loading}
                 control={form.control}
-                name="password"
+                name="confirmPassword"
                 render={({ field }) => (
                   <FormItem>
-                    <div className="flex items-center justify-between">
-                      <FormLabel htmlFor="" className="text-base font-medium ">
-                        Password
-                      </FormLabel>
-                      <Link
-                        href="/forgot-password"
-                        title=""
-                        className="text-sm font-semibold  hover:underline"
-                      >
-                        Forgot password?
-                      </Link>
-                    </div>
+                    <FormLabel htmlFor="" className="text-base font-medium ">
+                      Password
+                    </FormLabel>
                     <FormControl>
                       <Input
                         type="password"
-                        placeholder="Password"
+                        placeholder="Confirm Password"
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                         {...field}
                       />
@@ -121,21 +118,9 @@ function Login() {
               </Button>
             </form>
           </Form>
-
-          <p className="mt-4 text-center  text-sm text-gray-600 dark:text-gray-200 ">
-            Don&apos;t have an account?{" "}
-            <Link
-              href="/signup"
-              title=""
-              className="font-semibold  transition-all duration-200 hover:underline"
-            >
-              Create a free account
-            </Link>
-          </p>
         </div>
       </div>
     </section>
   );
 }
-
-export default Login;
+// Compare this snippet from src/components/ui/input.tsx:

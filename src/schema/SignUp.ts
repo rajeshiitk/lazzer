@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const checkPasswordStrength = (password: string) => {
+export const checkPasswordStrength = (password: string) => {
   if (password.length < 8) {
     return "Password must be at least 8 characters long";
   }
