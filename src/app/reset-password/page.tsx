@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IResetPassword, ResetPasswordSchema } from "@/schema/ResetPassword";
@@ -19,7 +19,7 @@ import { ArrowRight, LoaderIcon } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Logo from "@/components/Logo";
 
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
@@ -123,4 +123,17 @@ export default function ResetPasswordPage() {
     </section>
   );
 }
-// Compare this snippet from src/components/ui/input.tsx:
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense
+      fallback={
+        <div>
+          <LoaderIcon className="animate-spin" /> getting Token!....
+        </div>
+      }
+    >
+      {<ResetPasswordForm />}
+    </Suspense>
+  );
+}
