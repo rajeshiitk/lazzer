@@ -33,9 +33,9 @@ function AddTask() {
 
   return (
     <>
-      <div className=" py-12 sticky  z-10 top-0 right-0 flex flex-col justify-center ">
+      <div className="flex flex-col   justify-center ">
         <div className="relative py-3 w-11/12 max-w-xl mx-auto  sm:mx-auto">
-          <div className="relative  px-2 md:px-8  shadow-sm sm:rounded-xl">
+          <div className="relative   md:px-8  shadow-sm sm:rounded-xl">
             <form className="w-full">
               <div className="mb-5 relative">
                 <input
@@ -45,13 +45,13 @@ function AddTask() {
                   onChange={(e) => {
                     setTaskData({ ...taskData, title: e.target.value });
                   }}
-                  className="peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent"
+                  className="peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent bg-transparent"
                   placeholder="Today I will..."
                   autoComplete="off"
                 />
                 <label
                   htmlFor="title"
-                  className="peer-placeholder-shown:opacity-100   opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out"
+                  className="peer-placeholder-shown:opacity-100   opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out "
                 >
                   Today I will...
                 </label>
@@ -64,7 +64,7 @@ function AddTask() {
                   onChange={(e) => {
                     setTaskData({ ...taskData, description: e.target.value });
                   }}
-                  className="peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent"
+                  className="peer bg-transparent pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent"
                   placeholder="description here ..."
                   autoComplete="off"
                 />
