@@ -47,7 +47,9 @@ function Login() {
       }
       setLoading(false);
     } catch (error: any) {
-      toast.error(error?.response?.data?.error);
+      if (error.response.data.message) {
+        toast.error(error.response.data.message);
+      }
       setLoading(false);
     } finally {
       setLoading(false);
