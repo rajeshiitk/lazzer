@@ -19,10 +19,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { revalidatePath } from "next/cache";
 
 function Login() {
   const router = useRouter();
   const [loading, setLoading] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   const form = useForm<ILogin>({
     resolver: zodResolver(LoginSchema),
@@ -39,14 +41,19 @@ function Login() {
         "/api/users/login",
         values
       );
-      router.replace("/");
+      revalidatePath("/login");
+      if (response.status === 200) {
+        setIsLoggedIn(true);
+      }
       setLoading(false);
     } catch (error: any) {
-      toast.error(error.response.data.error);
+      toast.error(error?.response?.data?.error);
       setLoading(false);
     } finally {
       setLoading(false);
     }
+    router.replace("/");
+    router.refresh();
   }
 
   return (
