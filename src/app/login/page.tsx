@@ -3,7 +3,7 @@ import React from "react";
 import { ArrowRight, LoaderIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { Button } from "@/components/ui/button";
 import Logo from "@/components/Logo";
 import { useForm } from "react-hook-form";
@@ -19,7 +19,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { revalidatePath } from "next/cache";
 
 function Login() {
   const router = useRouter();
@@ -41,14 +40,14 @@ function Login() {
         "/api/users/login",
         values
       );
-      revalidatePath("/login");
       if (response.status === 200) {
         setIsLoggedIn(true);
       }
       setLoading(false);
     } catch (error: any) {
-      if (error.response.data.message) {
-        toast.error(error.response.data.message);
+      const err = error?.response?.data?.error;
+      if (err) {
+        toast.error(err);
       }
       setLoading(false);
     } finally {
