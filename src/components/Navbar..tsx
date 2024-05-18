@@ -20,6 +20,10 @@ export const routes = [
     label: "Profile",
   },
   {
+    href: "/showcase",
+    label: "Showcase",
+  },
+  {
     href: "/login",
     label: "Login",
   },
