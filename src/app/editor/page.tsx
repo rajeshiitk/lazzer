@@ -1,8 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import Editor from "@/components/editor/Editor";
 import { Button } from "@/components/ui/button";
-import { data } from "autoprefixer";
+import dynamic from "next/dynamic";
+const Editor = dynamic(() => import("@/components/editor/Editor"), {
+  ssr: false,
+});
 
 const INITIAL_DATA = {
   time: new Date().getTime(),
