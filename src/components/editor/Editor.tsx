@@ -6,22 +6,22 @@ type EditorProps = {
   data: any;
   onChange: (data: any) => void;
   editorblock: string;
+  resetTrigger?: boolean;
 };
 
-const Editor = ({ data, onChange, editorblock }: EditorProps) => {
-  const ref = useRef();
-  //Initialize editorjs
+const Editor = ({ data, onChange, editorblock, resetTrigger }: EditorProps) => {
+  console.log(data);
+  const ref = useRef<EditorJS>();
   useEffect(() => {
     //Initialize editorjs if we don't have a reference
     if (!ref.current) {
       const editor = new EditorJS({
         holder: editorblock,
-
         tools: EDITOR_JS_TOOLS,
         data: data,
         async onChange(api, event) {
           const data = await api.saver.save();
-          onChange(data);
+          onChange(() => data);
         },
       });
       ref.current = editor;
@@ -31,10 +31,18 @@ const Editor = ({ data, onChange, editorblock }: EditorProps) => {
     return () => {
       if (ref.current && ref.current.destroy) {
         ref.current.destroy();
+        ref.current = undefined;
       }
     };
-  }, []);
-  return <div className="w-full" id={editorblock} />;
+  }, [editorblock]);
+
+  useEffect(() => {
+    if (ref.current?.render) {
+      ref.current.render(data);
+    }
+  }, [resetTrigger]);
+
+  return <div className="w-full h-full" id={editorblock} />;
 };
 
 export default memo(Editor);
