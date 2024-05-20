@@ -16,12 +16,12 @@ type Props = {};
 
 export const routes = [
   {
-    href: "/profile",
-    label: "Profile",
-  },
-  {
     href: "/showcase",
     label: "Showcase",
+  },
+  {
+    href: "/editor",
+    label: "Editor",
   },
   {
     href: "/login",
